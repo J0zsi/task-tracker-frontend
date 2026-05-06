@@ -1,0 +1,9 @@
+@if (invalid() && touched()) {
+  @if (onlyFirstError()) {
+    <tui-error class="mbs-0!" [error]="errors()[0]?.message ?? null" />
+  } @else {
+    @for (error of errors(); track error.kind) {
+      <tui-error class="mbs-0!" [error]="error.message ?? null" />
+    }
+  }
+}

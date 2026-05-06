@@ -1,0 +1,11 @@
+<label tuiLabel>
+  @if (label()) {
+    <span
+      >{{ label() }}
+      @if (requiredIndicator()) {
+        <span [style.color]="'var(--tui-text-negative)'">*</span>
+      }
+    </span>
+  }
+  <ng-content />
+</label>

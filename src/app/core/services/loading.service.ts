@@ -1,0 +1,14 @@
+import { computed, Injectable, signal } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class LoadingService {
+  private activeRequests = signal(0);
+  isLoading = computed(() => this.activeRequests() > 0);
+
+  startLoading() {
+    this.activeRequests.update((v) => v + 1);
+  }
+  stopLoading() {
+    this.activeRequests.update((v) => Math.max(0, v - 1));
+  }
+}

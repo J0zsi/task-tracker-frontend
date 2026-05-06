@@ -1,59 +1,41 @@
-# TaskTrackerFrontend
+Az frontend indítása:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+1. Navigálás a projektbe:
+   cd projekt-neve
 
-## Development server
+2. Függőségek letöltése:
+   npm install
 
-To start a local development server, run:
+3. App indítása:
+   npx ng serve
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A frontend a http://localhost:4200 cı́men érhető el.
+Legalább Node 20.19.0 szükséges.
 
-## Code scaffolding
+Az alkalmazás Angular 21-es verzióval készült.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Észrevételek:
 
-```bash
-ng generate --help
-```
+-Az open-api leíróban a response lehetne JSON, ha azzal dolgozunk és akkor nem kell a blob-ot parse-olni minden request-nél.
 
-## Building
+-Lapozás biztosítása státuszonként/prioritásonként stb:
+Hasznos lenne egy request amit lehetne paraméterezni, hogy melyik mező alapján adja vissza group-olva a task-okat és hozzá a lapozási adatokat. Így be lehetne tölteni csoportosítva (drag & drop-os rész) a task-okat egyetlen kéréssel, ha nagy számú adat van.
 
-To build the project run:
+-Címre és leírásra külön lekérdezés lehetősége a kereséshez.
 
-```bash
-ng build
-```
+-Felelősök/user-ek lekérezésének lehetősége ne csak id, hanem a beírt szöveg alapján a nevére match-elve.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+-Sort API-hoz objektum megadása, pl.:
+{direction: '', active: ''}
+ne csak vesszővel elválasztott string
 
-## Running unit tests
+-stászusz és property sorrenddezet lekéréshez jó lenne egy logikai változat is az ABC sorrend mellé:
+TODO, IN_REVIEW, IN_PROGRESS, DONE => TODO, IN_PROGRESS, IN_REVIEW, DONE
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

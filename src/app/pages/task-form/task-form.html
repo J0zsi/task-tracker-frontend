@@ -1,0 +1,56 @@
+<div tuiCardLarge appearance="neutral" class="m-auto max-w-100 w-full">
+  <form
+    (submit)="onSubmit($event)"
+    tuiForm="s"
+    class="flex flex-col gap-4"
+  >
+    <h1 class="text-2xl font-bold text-center">{{ isNewTask ? 'New Task' : 'Edit Task' }}</h1>
+    <app-input
+      label="Title"
+      placeholder="Enter a title"
+      [formField]="taskForm.title"
+      [requiredIndicator]="true"
+    />
+    <app-textarea
+      label="Description"
+      placeholder="Enter a description"
+      [formField]="taskForm.description"
+    />
+    <app-select
+      label="Status"
+      placeholder="Select a Status"
+      [formField]="taskForm.status"
+      [items]="statusItems"
+    />
+    <app-select
+      label="Priority"
+      placeholder="Select a priority"
+      [formField]="taskForm.priority"
+      [items]="priorityItems"
+    />
+    <app-date-picker
+      label="Due date"
+      placeholder="Select a Due date"
+      [formField]="taskForm.dueDate"
+    />
+    <app-select
+      label="Assignees"
+      placeholder="Select an Assignee"
+      [formField]="taskForm.assignee"
+      [items]="assigneeItems"
+    />
+    <app-multi-select
+      label="Tags"
+      [formField]="taskForm.tags"
+      placeholder="Select the tags"
+      [items]="tagItems"
+    />
+
+    <div class="flex justify-end gap-2 mt-2">
+      <a class="w-24" tuiButton appearance="outline" size="m" [routerLink]="[routes.TASKS]">
+        Cancel
+      </a>
+      <button class="w-24" tuiButton size="m" type="submit" [disabled]="loading()">Save</button>
+    </div>
+  </form>
+</div>

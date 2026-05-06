@@ -1,0 +1,36 @@
+<div
+  class="flex gap-4 flex-col"
+  [class]="selectedLayoutMode() === 'row' ? 'flex-col' : 'lg:flex-row'"
+  cdkDropListGroup
+>
+  @for (status of statusList; track status) {
+    <div
+      class="flex-1 bg-gray-100 rounded-lg p-3 flex flex-col"
+      [class]="
+        selectedLayoutMode() === 'column' ? 'lg:min-h-125 lg:max-h-80 lg:overflow-y-auto' : 'min-h-30'
+      "
+    >
+      <h3 class="font-bold">{{ status }}</h3>
+      <hr class="border-gray-300 my-2" />
+      <div
+        [id]="status"
+        cdkDropList
+        [cdkDropListData]="tasksByStatus()[status]"
+        (cdkDropListDropped)="drop($event)"
+        class="flex flex-col gap-3 flex-1"
+      >
+        @for (task of tasksByStatus()[status]; track task.id) {
+          <div
+            cdkDrag
+            [cdkDragData]="task"
+            class="cursor-move overflow-hidden"
+            [tuiSkeleton]="tasksLoading()"
+          >
+            <div class="font-semibold truncate">{{ task.title }}</div>
+            <p class="text-sm text-gray-600 line-clamp-3">{{ task.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

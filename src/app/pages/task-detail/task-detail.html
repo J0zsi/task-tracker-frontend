@@ -1,0 +1,62 @@
+<div class="max-w-2xl m-auto mt-20 mb-10">
+  <div tuiCardLarge appearance="neutral" class="p-5 gap-2! text-xl! mb-5">
+    <div class="flex flex-wrap justify-between gap-x-12 gap-y-3 mb-2">
+      <h3 class="text-2xl font-bold">{{ task()?.title }}</h3>
+      <div class="flex gap-2 self-center">
+        <div tuiBadge size="xl" appearance="warning">{{ task()?.priority }}</div>
+        <div tuiBadge size="xl" appearance="info">{{ task()?.status }}</div>
+      </div>
+    </div>
+
+    <hr class="border-gray-300" />
+    <div class="py-3 mb-2">
+      <p class="">{{ task()?.description }}</p>
+    </div>
+
+    <div class="grid grid-cols-1 min-[400px]:grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 min-w-90">
+      <span class="text-gray-500">Due date:</span>
+      <span class="font-bold">{{ task()?.dueDate ?? '-' }}</span>
+
+      <span class="text-gray-500">Created at:</span>
+      <span class="font-bold">{{ task()?.createdAt | date: 'yyyy-MM-dd' }}</span>
+
+      <span class="text-gray-500">Updated at:</span>
+      <span class="font-bold">{{ task()?.updatedAt | date: 'yyyy-MM-dd' }}</span>
+
+      <span class="text-gray-500">Assignee:</span>
+      <div class="flex items-center gap-2">
+        @let assignee = task()?.assignee;
+        @if (assignee) {
+          @if (assignee.avatarUrl) {
+            <div class="flex gap-3">
+              <div tuiAvatar size="m">
+                <img [alt]="assignee.name" [src]="assignee.avatarUrl" />
+              </div>
+              <div class="flex flex-col">
+                <span>{{ assignee.name }}</span>
+                <span class="text-gray-500">{{ assignee.email }}</span>
+              </div>
+            </div>
+          } @else {
+            <div tuiAvatar="@tui.user" size="m"></div>
+          }
+        } @else {
+          <span class="font-bold">-</span>
+        }
+      </div>
+    </div>
+
+    <hr class="border-gray-300 mt-4 mb-3" />
+
+    <div class="flex gap-2 flex-wrap justify-center">
+      @for (tag of task()?.tags; track tag.id) {
+        <div size="xl" tuiBadge [style.background]="tag.color + '20'" [style.color]="tag.color">
+          {{ tag.name }}
+        </div>
+      }
+    </div>
+  </div>
+  <div class="flex justify-end gap-3 ml-auto w-full">
+    <a class="w-full" tuiButton size="m" [routerLink]="[routes.TASKS]"> Go to tasks </a>
+  </div>
+</div>

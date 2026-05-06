@@ -1,0 +1,20 @@
+<tui-drawer
+  *tuiPopup="open()"
+  [direction]="direction()"
+  class="drawer w-full! sm:w-100! max-w-100!"
+  [overlay]="overlay()"
+  (click.self)="closeRequested.emit()"
+>
+  <button
+    iconStart="@tui.x"
+    size="s"
+    tuiIconButton
+    type="button"
+    [style.border-radius.%]="100"
+    class="absolute! right-6"
+    (click)="closeRequested.emit()"
+  >
+    Close
+  </button>
+  <ng-content />
+</tui-drawer>

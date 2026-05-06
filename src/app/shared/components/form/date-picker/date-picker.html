@@ -1,0 +1,20 @@
+<app-label [label]="label()" [requiredIndicator]="requiredIndicator()">
+  <tui-textfield
+    tuiMobileCalendar
+    [tuiTextfieldSize]="textfieldSize()"
+    [tuiTextfieldCleaner]="textfieldCleaner()"
+  >
+    <input
+      tuiInputDate
+      type="date"
+      [(ngModel)]="value"
+      [placeholder]="placeholder()"
+      [min]="formattedMinDate()"
+      [max]="formattedMaxDate()"
+      [invalid]="invalid() && touched()"
+      (blur)="touched.set(true)"
+    />
+    <tui-calendar *tuiDropdown />
+  </tui-textfield>
+</app-label>
+<app-error-control [invalid]="invalid()" [touched]="touched()" [errors]="errors()" />

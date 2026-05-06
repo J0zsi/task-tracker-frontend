@@ -1,0 +1,14 @@
+<app-label [label]="label()" [requiredIndicator]="requiredIndicator()">
+  <tui-textfield [tuiTextfieldSize]="textfieldSize()" [tuiTextfieldCleaner]="textfieldCleaner()">
+    <textarea
+      class="resize-none"
+      tuiTextarea
+      [(ngModel)]="value"
+      [placeholder]="placeholder()"
+      [rows]="rows()"
+      [invalid]="invalid() && touched()"
+      (blur)="touched.set(true)"
+    ></textarea>
+  </tui-textfield>
+</app-label>
+<app-error-control [invalid]="invalid()" [touched]="touched()" [errors]="errors()" />

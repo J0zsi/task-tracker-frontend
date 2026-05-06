@@ -1,0 +1,16 @@
+<div class="flex flex-wrap items-center justify-center gap-2 w-full">
+  <tui-pagination
+    size="l"
+    [length]="totalPages()"
+    [index]="currentPage()"
+    (indexChange)="onIndexChange($event)"
+  />
+  <app-select
+    [value]="pageSize()"
+    (valueChange)="onPageSizeChange($event)"
+    [items]="pageSizeOptions()"
+    [textfieldCleaner]="false"
+    textfieldSize="s"
+    class="w-20"
+  />
+</div>

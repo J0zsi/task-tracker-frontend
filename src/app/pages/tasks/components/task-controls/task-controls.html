@@ -1,0 +1,58 @@
+<div
+  class="flex flex-wrap justify-center mb-8 px-8 min-[485px]:justify-between min-[485px]:mb-4 relative"
+>
+  <div class="hidden min-[485px]:block">
+    <a class="hidden min-[485px]:flex" [routerLink]="routes.TASKS_NEW" size="m" tuiButton
+      ><tui-icon icon="@tui.plus" /> New task
+    </a>
+  </div>
+
+  <div class="flex justify-center md:absolute md:left-1/2 md:-translate-x-1/2">
+    <tui-segmented size="m">
+      @for (option of viewOptions; track $index) {
+        <label>
+          <input
+            name="radio"
+            type="radio"
+            [value]="option.value"
+            [ngModel]="selectedView()"
+            (ngModelChange)="selectedView.set($event); searchRequest.emit()"
+          />
+          {{ option.label }}
+        </label>
+      }
+    </tui-segmented>
+  </div>
+
+  <div class="justify-end gap-2 hidden lg:flex">
+    <button
+      tuiIconButton
+      iconStart="@tui.list"
+      size="m"
+      (click)="selectedLayoutMode.set('row')"
+    ></button>
+    <button
+      tuiIconButton
+      iconStart="@tui.layout-grid"
+      size="m"
+      (click)="selectedLayoutMode.set('column')"
+    ></button>
+  </div>
+</div>
+
+<div class="flex flex-wrap gap-x-8 justify-center min-[485px]:justify-between px-8">
+  <div class="self-end text-lg">
+    Tasks remaining: <span class="font-bold">{{ totalElements() }}</span>
+  </div>
+  <app-select
+    class="min-w-60"
+    placeholder="Sort by"
+    [items]="sortItems"
+    [value]="selectedSortOption()"
+    (valueChange)="selectedSortOption.set($event); searchRequest.emit()"
+  />
+</div>
+
+<div class="min-[485px]:hidden flex justify-center mt-6 px-8">
+  <a [routerLink]="routes.TASKS_NEW" size="m" tuiButton><tui-icon icon="@tui.plus" /> New task </a>
+</div>

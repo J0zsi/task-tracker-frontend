@@ -1,0 +1,24 @@
+<app-label [label]="label()" [requiredIndicator]="requiredIndicator()">
+  <tui-textfield
+    tuiChevron
+    [tuiTextfieldSize]="textfieldSize()"
+    [tuiTextfieldCleaner]="textfieldCleaner()"
+    [stringify]="stringify"
+  >
+    <input
+      tuiSelect
+      [(ngModel)]="value"
+      [placeholder]="placeholder()"
+      [invalid]="invalid() && touched()"
+      (blur)="touched.set(true)"
+    />
+    <tui-data-list *tuiDropdown>
+      @for (item of items(); track item) {
+        <button tuiOption type="button" [value]="getItemValue(item)">
+          {{ getItemLabel(item) }}
+        </button>
+      }
+    </tui-data-list>
+  </tui-textfield>
+</app-label>
+<app-error-control [invalid]="invalid()" [touched]="touched()" [errors]="errors()" />

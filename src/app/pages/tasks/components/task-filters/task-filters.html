@@ -1,0 +1,38 @@
+<div
+  tuiCardLarge
+  appearance="neutral"
+  class="gap-4 grid! sm:grid-cols-2 lg:grid-cols-3 p-8 mt-4 mb-10 rounded-2xl"
+>
+  <app-input
+    class="w-full"
+    placeholder="Title / Description"
+    [(value)]="titleAndDescriptionSearchTerm"
+  />
+  <app-select placeholder="Select a Status" [(value)]="selectedStatus" [items]="statusItems" />
+  <app-select
+    placeholder="Select a Priority"
+    [(value)]="selectedPriority"
+    [items]="priorityItems"
+  />
+  <app-multi-select [(value)]="selectedTags" placeholder="Select the tags" [items]="tagItems" />
+  <app-select
+    placeholder="Select an Assignee"
+    [(value)]="selectedAssignee"
+    [items]="assigneeItems"
+  />
+  <div class="flex justify-end gap-3">
+    <button
+      tuiButton
+      size="m"
+      appearance="outline"
+      [disabled]="tasksLoading()"
+      (click)="clearFilters(); searchRequest.emit()"
+    >
+      <tui-icon icon="@tui.x" />
+      Clear filters
+    </button>
+    <button tuiButton size="m" [disabled]="tasksLoading()" (click)="searchRequest.emit()">
+      <tui-icon icon="@tui.search" />Search
+    </button>
+  </div>
+</div>

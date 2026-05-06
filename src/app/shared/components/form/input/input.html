@@ -1,0 +1,13 @@
+<app-label [label]="label()" [requiredIndicator]="requiredIndicator()">
+  <tui-textfield [tuiTextfieldSize]="textfieldSize()" [tuiTextfieldCleaner]="textfieldCleaner()">
+    <input
+      tuiInput
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [invalid]="invalid() && touched()"
+      (input)="value.set($event.target.value)"
+      (blur)="touched.set(true)"
+    />
+  </tui-textfield>
+</app-label>
+<app-error-control [invalid]="invalid()" [touched]="touched()" [errors]="errors()" />
