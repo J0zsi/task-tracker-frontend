@@ -18,7 +18,7 @@ import { finalize, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { blobToJson } from '../../shared/utils/index.utils';
 import { Pagination } from '../../shared/components/navigation/pagination/pagination';
-import { PaginationState } from '../../shared/components/navigation/pagination/model';
+import { PaginationState } from '../../shared/components/navigation/pagination/models';
 import { ROUTES } from '../../core/constants/routes.constants';
 import { LayoutMode, SortType, View } from './models';
 import { TaskCards } from './components/task-cards/task-cards';
@@ -48,7 +48,6 @@ export class Tasks {
     source: this.pagedResponseTask,
     computation: (pagedResponseTask, previous): number => {
       if (this.selectedView() === 'list') {
-        console.log('bent');
         return pagedResponseTask.page ?? 0;
       }
       return previous?.value ?? 0;
@@ -58,7 +57,6 @@ export class Tasks {
     source: this.pagedResponseTask,
     computation: (pagedResponseTask, previous) => {
       if (this.selectedView() === 'list') {
-        console.log('bent');
         return pagedResponseTask.size ?? 10;
       }
       return previous?.value ?? 10;
@@ -105,7 +103,6 @@ export class Tasks {
       )
       .pipe(
         blobToJson<PagedResponseTaskDto>(),
-        tap((jsonResponse) => console.log(jsonResponse)),
         finalize(() => this.tasksLoading.set(false)),
       )
       .subscribe((jsonResponse) => {

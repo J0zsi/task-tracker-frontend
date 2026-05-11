@@ -38,7 +38,6 @@ export class App {
         take(1),
       )
       .subscribe((event) => {
-        console.log(event);
         this.isFirstNavigationLoading.set(false);
         if (event instanceof NavigationError || event instanceof NavigationCancel) {
           this.router.navigateByUrl(ROUTES.ERROR);

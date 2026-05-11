@@ -37,7 +37,6 @@ export class TaskCardsDragDrop {
 
     if (this.selectedView() === 'drag-drop') {
       this.tasks().forEach((task) => {
-        console.log(task);
         groupedTasksByStatus[task.status as TaskDto.StatusEnum].push(task);
       });
     }

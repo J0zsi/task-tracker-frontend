@@ -20,15 +20,12 @@ import { TextfieldSize } from '../../../models';
     tuiInputDateOptionsProvider({
       valueTransformer: {
         fromControlValue: (value: string | null): TuiDay | null => {
-          console.log(value);
           if (!value) return null;
 
           const [year, month, day] = value.split('-').map(Number);
-          console.log('year:', year, 'month:', month, 'day:', day);
           return new TuiDay(year, month - 1, day);
         },
         toControlValue: (value: TuiDay | null): string | null => {
-          console.log(value);
           if (!value) return null;
 
           const y = value.year;
@@ -57,7 +54,6 @@ export default class DatePicker implements FormValueControl<string | null> {
 
   formattedMinDate = computed(() => {
     const minDate = this.minDate();
-    console.log(minDate);
     if (this.minDateToday()) {
       return TuiDay.currentLocal();
     } else if (minDate) {
@@ -67,7 +63,6 @@ export default class DatePicker implements FormValueControl<string | null> {
   });
   formattedMaxDate = computed(() => {
     const maxDate = this.maxDate();
-    console.log(maxDate);
     if (maxDate) {
       return TuiDay.fromUtcNativeDate(maxDate);
     }

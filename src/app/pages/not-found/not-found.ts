@@ -9,6 +9,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './not-found.html',
   styleUrl: './not-found.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'my-auto',
+  },
 })
 export class NotFound {
   protected readonly routes = ROUTES;

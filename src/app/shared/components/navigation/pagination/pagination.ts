@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, model, output } from '@angular/core';
 import { TuiPagination } from '@taiga-ui/kit';
 import { Select } from '../../form/select/select';
-import { PaginationState } from './model';
+import { PaginationState } from './models';
 
 @Component({
   selector: 'app-pagination',

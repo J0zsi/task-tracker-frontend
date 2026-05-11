@@ -32,7 +32,7 @@ Hasznos lenne egy request amit lehetne paraméterezni, hogy melyik mező alapjá
 {direction: '', active: ''}
 ne csak vesszővel elválasztott string
 
--stászusz és property sorrenddezet lekéréshez jó lenne egy logikai változat is az ABC sorrend mellé:
+-státusz és property sorrendezett lekéréshez jó lenne egy logikai változat is az ABC sorrend mellé:
 TODO, IN_REVIEW, IN_PROGRESS, DONE => TODO, IN_PROGRESS, IN_REVIEW, DONE
 
 

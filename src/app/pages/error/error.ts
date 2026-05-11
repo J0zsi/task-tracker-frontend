@@ -9,6 +9,9 @@ import { TuiButton } from '@taiga-ui/core';
   templateUrl: './error.html',
   styleUrl: './error.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'my-auto',
+  },
 })
 export class Error {
   protected readonly routes = ROUTES;

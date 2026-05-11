@@ -11,15 +11,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     retry({
       count: req.context.get(MAX_RETRIES),
       delay: (error: HttpErrorResponse, retryCount) => {
-        console.log(`Retry attempt ${retryCount}/${req.context.get(MAX_RETRIES)}`);
         return timer(1000 * retryCount);
       },
     }),
     catchError((error: HttpErrorResponse) => {
       const maxRetries = req.context.get(MAX_RETRIES);
       const handleError = req.context.get(INTERCEPTOR_HANDLE_ERROR);
-      console.log(maxRetries);
-      console.log(handleError);
 
       if (handleError) {
         errorService.handleHttpError(error);

@@ -16,6 +16,7 @@ import { ROUTES } from '../../core/constants/routes.constants';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { toTaskFormData, toTaskRequest } from './mappers';
 import { toControlItems } from '../../shared/mappers';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-task',
@@ -37,6 +38,7 @@ import { toControlItems } from '../../shared/mappers';
 export class TaskForm implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private readonly notifications = inject(NotificationService);
   private taskService = inject(TaskControllerService);
 
   private readonly taskId = this.route.snapshot.paramMap.get('id');
@@ -76,8 +78,6 @@ export class TaskForm implements OnInit {
     this.tagItems = toControlItems(this.tags());
     this.assigneeItems = toControlItems(this.assignees());
 
-    console.log(this.isNewTask);
-
     if (this.isNewTask) {
       return;
     }
@@ -99,14 +99,23 @@ export class TaskForm implements OnInit {
       const taskRequest: TaskRequest = toTaskRequest(this.taskFormModel());
 
       let request$ = this.taskService.create1(taskRequest);
+      let successMessage = 'Task created.';
       if (this.taskId) {
         request$ = this.taskService.update1(Number(this.taskId), taskRequest);
+        successMessage = 'Task edited.';
       }
 
-      request$.pipe(blobToJson<TaskDto>()).subscribe((res) => {
-        this.router.navigate([ROUTES.TASKS]).finally(() => {
-          this.loading.set(false);
-        });
+      request$.pipe(blobToJson<TaskDto>()).subscribe({
+        next: (res) => {
+          this.notifications.openSuccess(successMessage, {
+            label: 'Success',
+          });
+
+          this.router.navigate([ROUTES.TASKS]).finally(() => {
+            this.loading.set(false);
+          });
+        },
+        error: () => this.loading.set(false),
       });
     });
   }

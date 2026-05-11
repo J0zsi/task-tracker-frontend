@@ -20,6 +20,5 @@ export const appConfig: ApplicationConfig = {
     }),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     provideTaiga(),
-    provideTaiga(),
   ],
 };

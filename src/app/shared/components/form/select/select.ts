@@ -54,8 +54,4 @@ export class Select<T> implements FormValueControl<T | null> {
     const foundItem = this.items().find((item) => this.getItemValue(item) === value);
     return foundItem ? this.getItemLabel(foundItem) : '';
   };
-
-  ngOnInit() {
-    console.log(this.items());
-  }
 }
